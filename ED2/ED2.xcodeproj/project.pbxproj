@@ -19,11 +19,11 @@
 		2416F06D17346F83005463CF = {
 			isa = PBXGroup;
 			children = (
-				2416F07417346FA1005463CF /* Enunciado.pdf */,
 				2416F07517346FA1005463CF /* main.c */,
-				2416F07617346FA1005463CF /* makefile */,
 				2416F07717346FA1005463CF /* Point.c */,
 				2416F07817346FA1005463CF /* Point.h */,
+				2416F07417346FA1005463CF /* Enunciado.pdf */,
+				2416F07617346FA1005463CF /* makefile */,
 				2416F07917346FA1005463CF /* README.md */,
 			);
 			sourceTree = "<group>";
