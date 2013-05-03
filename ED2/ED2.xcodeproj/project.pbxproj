@@ -6,10 +6,25 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXFileReference section */
+		2416F07417346FA1005463CF /* Enunciado.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Enunciado.pdf; sourceTree = "<group>"; };
+		2416F07517346FA1005463CF /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		2416F07617346FA1005463CF /* makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = makefile; sourceTree = "<group>"; };
+		2416F07717346FA1005463CF /* Point.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Point.c; sourceTree = "<group>"; };
+		2416F07817346FA1005463CF /* Point.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Point.h; sourceTree = "<group>"; };
+		2416F07917346FA1005463CF /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
 /* Begin PBXGroup section */
 		2416F06D17346F83005463CF = {
 			isa = PBXGroup;
 			children = (
+				2416F07417346FA1005463CF /* Enunciado.pdf */,
+				2416F07517346FA1005463CF /* main.c */,
+				2416F07617346FA1005463CF /* makefile */,
+				2416F07717346FA1005463CF /* Point.c */,
+				2416F07817346FA1005463CF /* Point.h */,
+				2416F07917346FA1005463CF /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
