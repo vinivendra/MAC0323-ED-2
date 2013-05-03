@@ -82,6 +82,7 @@ int main (int argc, char *argv[]) {
     /* Atualiza a seed do rand() */
     srand(s);
     
+    
     /*
      Inicialização dos pontos. Se o usuário passou o parâmetro -C, vamos pegar os dados da stdin.
      Caso contrário, vamos gerar os pontos aleatoriamente.
