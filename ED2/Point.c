@@ -5,6 +5,7 @@
 
 #define NULLFLOAT -10
 
+
 point initPoint(int D) {
     point new = malloc((D+1) * sizeof(float));
     new[D] = NULLFLOAT;
