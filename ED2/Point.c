@@ -58,6 +58,16 @@ node randNode() { /* Malloca e retorna um novo nodulo, já com um ponto com valo
     return new;
 }
 
+float distance (point point1, point point2) { /* Retorna o quadrado da distância entre dois pontos */
+    float resultado;
+    int i = 0;
+    
+    for (i = 0; i < dim; i++)
+        resultado += (point1[i]-point2[i]) * (point1[i]-point2[i]);
+    
+    return resultado;
+}
+
 /*
  PRECISA TESTAR SE CHAMAR O SRAND NO MAIN MUDA TAMBÉM OS VALORES DO RAND AQUI NA POINT.C
  */
