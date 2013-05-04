@@ -12,6 +12,7 @@
 #define NULLFLOAT -10
 
 static int dim = 0;
+static int masterIndex = 0;
 
 
 /*
@@ -29,15 +30,15 @@ point initEmptyPoint() { /* Malloca e retorna um novo ponto */
 }
 
 node initNode (){ /* Malloca e retorna um novo nodulo, já com um ponto vazio */
-    node new = malloc(sizeof(Node));
+    node new = initEmptyNode();
     new->point = initEmptyPoint();
-    new->prox = NULL;
     return new;
 }
 
 node initEmptyNode () { /* Malloca e retorna um novo nodulo, sem ponto */
     node new = malloc(sizeof(Node));
     new->prox = NULL;
+    new->index = ++ masterIndex;
     return new;
 }
 

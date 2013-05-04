@@ -13,6 +13,7 @@ typedef float *point;
 
 typedef struct Node {
     point point;
+    int index;
     struct Node* prox;
 } Node;
 
