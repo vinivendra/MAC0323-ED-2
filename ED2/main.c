@@ -34,7 +34,7 @@ int main (int argc, char *argv[]) {
      Outras variáveis:
     */
     
-    node *pontos = malloc(sizeof(node));       /* Ponteiro para a cabeça da futura lista de pontos */
+    node pontos = initEmptyNode();       /* Ponteiro para a cabeça da futura lista de pontos */
     
     
     
@@ -83,6 +83,8 @@ int main (int argc, char *argv[]) {
     /* Atualiza a seed do rand() */
     srand(s);
     
+    /* Passa a quantidade de dimensões para a biblioteca */
+    initDim(D);
     
     /*
      Inicialização dos pontos. Se o usuário passou o parâmetro -C, vamos pegar os dados da stdin.
@@ -92,7 +94,7 @@ int main (int argc, char *argv[]) {
     
     if (c == 1) {
         float x = 0;            /* Guardar o input do usuário */
-        node* nodulo = pontos;  /* Percorrer a lista de pontos */
+        node nodulo = pontos;  /* Percorrer e criar a lista de pontos */
         
         i = D;                  /* Inicializa i de tal forma que a primeira iteração vá criar um nódulo novo */
         n = 0;                  /* Para contar o número de pontos que o usuário vai entrar */
@@ -102,8 +104,8 @@ int main (int argc, char *argv[]) {
         
         while (scanf("%f", &x) == 1) {
             if (i == D) {               /* O usuário vai começar um ponto novo */
-                node *aux = nodulo;     /* Inicializa o novo ponto */
-                nodulo = initNode(D);
+                node aux = nodulo;     /* Inicializa o novo ponto */
+                nodulo = initNode();
                 aux->prox = nodulo;
                 
                 i = 0;                  /* Reinicia o contador, soma 1 no número de pontos */
@@ -116,7 +118,13 @@ int main (int argc, char *argv[]) {
         
         printf("Pontos gerados.\n");
     }
-    
+    else {
+        node nodulo = pontos; /* Percorrer e criar a lista de pontos */
+        for (i = 0; i < n; i ++) { /* Precisa criar n pontos */
+            nodulo->prox = randNode(); /* Inicializa um novo ponto com valores aleatórios */
+            nodulo = nodulo->prox;
+        }
+    }
     
     
     /*
@@ -124,8 +132,8 @@ int main (int argc, char *argv[]) {
     */
     
     
-    if (v > 0) {        /* Se for 1 ou dois (v ou V estiver presente) é necessário imprimir os pontos */
-        node *nodulo = pontos->prox;    /* Percorrer a lista de pontos */
+    if (v > 0) {        /* Se for 1 ou 2 (v ou V estiver presente) é necessário imprimir os pontos */
+        node nodulo = pontos->prox;    /* Percorrer a lista de pontos */
         
         while (nodulo != NULL) {        /* Enquanto a lista não acabar */
             printf("(");

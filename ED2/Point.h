@@ -11,27 +11,28 @@
 
 typedef float *point;
 
-typedef struct node {
+typedef struct Node {
     point point;
-    struct node* prox;
-} node;
+    struct Node* prox;
+} Node;
 
-
+typedef Node *node;
 
 
 /*
  Protótipos
 */
 
-point initPoint(int D);
-node *initNode (int D);
+void initDim(int D);
+point initEmptyPoint();
+node initNode ();
+node initEmptyNode ();
 point randPoint();
+node randNode();
 float distance (point, point);
 
 /*
  Observações:
-    Para facilitar na implementação, opta-se por usar point como um vetor de floats com D+1 posições.
-    A posição point[D] terá sempre o valor arbitrario NULLFLOAT. Desse modo podemos sempre percorrer
-    o vetor, mesmo sem saber quantas dimensões ele tem; basta parar ao achar uma posição com valor
-    NULLFLOAT.
+    Para facilitar na implementação, opta-se por usar point como um vetor de floats com D+1 posições. A posição point[D] terá sempre o valor arbitrario NULLFLOAT. Desse modo podemos sempre percorrer o vetor, mesmo sem saber quantas dimensões ele tem; basta parar ao achar uma posição com valor NULLFLOAT.
+        (ISSO É REALMENTE NECESSÁRIO??) 
 */
