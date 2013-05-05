@@ -38,3 +38,29 @@ node randNode() { /* Malloca e retorna um novo nodulo, já com um ponto com valo
     new->point = randPoint();
     return new;
 }
+
+node removeProximoNodulo (node lista) { /* Remove o nodulo 'lista->prox' e devolve um ponteiro para ele */
+    node new = lista->prox;
+    lista->prox = new->prox;
+    new->prox = NULL;
+    return new;
+}
+
+void insereNodulo (node nodulo, node lista) { /* Insere o nodulo 'nodulo' logo depois do nodulo 'lista' */
+    node aux = lista->prox;
+    lista->prox = nodulo;
+    nodulo->prox = aux;
+}
+
+node juntaLista (node lista1, node lista2) { /* Junta a 'lista2' logo depois da 'lista1' e devolve um ponteiro para a lista 1.
+                                              Considera que ambas têm cabeça. */
+    node nodulo = lista1;
+    
+    while (nodulo->prox != NULL) { /* Faz nodulo apontar para o fim da lista1 */
+        nodulo = nodulo->prox;
+    }
+    
+    nodulo->prox = lista2->prox; /* Junta as duas listas */
+    
+    return lista1;
+}

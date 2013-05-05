@@ -24,3 +24,6 @@ node initNode ();
 node initEmptyNode ();
 node initHeadNode ();
 node randNode();
+node removeProximoNodulo (node lista);
+void insereNodulo (node nodulo, node lista);
+node juntaLista (node lista1, node lista2);
