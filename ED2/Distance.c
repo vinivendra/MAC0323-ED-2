@@ -6,35 +6,43 @@
 /*
  Defines e variáveis globais
     Será usado um vetor de distâncias, que é a parte principal do algoritmo que calcula o limiar de conexidade. Ele deve ser inicializado, ordenado e então deve-se buscar a distância desejada, que é uma aproximação do limiar.
+    Para fácil acesso às distâncias, já que calculá-las é a parte mais demorada, utiliza-se uma matriz. Ela poderia ser a mesma que o vetor, mas como vamos reordenar o vetor não teremos mais fácil acesso; a matriz, por outro lado, uma vez inicializada permanecerá intacta.
 */
 
 #define YES 1
 #define NO 0
 
-
 static float **matrizDistancias;
+static float *vetorDistancias;
 
-void initMatriz (int n) { /* Malloca a memória necessária para a matriz 'distâncias' */
+/*
+ Funções
+ */
+
+void initMatriz (int n) { /* Malloca a memória necessária para a matriz 'matrizDistancias' */
     int k;
     
     matrizDistancias = malloc(n*sizeof(float *));
     for (k = 0; k < n; k++) matrizDistancias[k] = malloc(n*sizeof(float));
 }
 
-/* Para não ter que recalcular inúmeras vezes a distância entre dois pontos (algo que demora, com muitas dimensões), opta-se
-        por criar uma matriz com todas as distâncias. Como o número de pontos esperado não é tão grande, a memória allocada
-        deve ser razoavelmente pequena. */
+void initVetor (int n) {
+    vetorDistancias = malloc(n*n*sizeof(float));
+}
 
-void initGrafo (node grafo, int n) { /* Popula a matriz 'distancias', que vai guardar as distancias entre todos os pontos. */
-    node i, j;
+void initGrafo (node grafo, int n) { /* Popula a matriz 'matrizDistancias' e o vetor 'vetorDistancias', que vão guardar as distancias entre
+                                        todos os pontos. */
+    node i, j; /* Percorrem os pontos para pegar as distancias */
+    int k = 0; /* Percorre o vetorDistancias */
     
     initMatriz(n);
+    initVetor(n);
     
     for (i = grafo->prox; i != NULL; i = i->prox) {
-        for (j = i; j != NULL; j = j->prox) {
+        for (j = grafo->prox; j != NULL; j = j->prox) {
             float d = distance(i->point, j->point); /* Colocar o valor em [i][j] e em [j][i] permite acessar a matriz com quaisquer índices */
             matrizDistancias[i->index][j->index] = d;
-            matrizDistancias[j->index][i->index] = d;
+            vetorDistancias[k++] = d;
         }
     }
 }
