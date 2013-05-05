@@ -11,14 +11,6 @@
 
 typedef float *point;
 
-typedef struct Node {
-    point point;
-    int index;
-    struct Node* prox;
-} Node;
-
-typedef Node *node;
-
 
 /*
  Protótipos
@@ -26,10 +18,7 @@ typedef Node *node;
 
 void initDim(int D);
 point initEmptyPoint();
-node initNode ();
-node initEmptyNode ();
 point randPoint();
-node randNode();
 float distance (point p1, point p2);
 
 /*

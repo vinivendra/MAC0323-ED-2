@@ -8,32 +8,39 @@
     Será usado um vetor de distâncias, que é a parte principal do algoritmo que calcula o limiar de conexidade. Ele deve ser inicializado, ordenado e então deve-se buscar a distância desejada, que é uma aproximação do limiar.
 */
 
-#define TRUE 1
-#define FALSE 0
+#define YES 1
+#define NO 0
 
-static float **distancias;
-static int n;
 
-void initDistancias () {
+static float **matrizDistancias;
+
+void initMatriz (int n) { /* Malloca a memória necessária para a matriz 'distâncias' */
     int k;
     
-    distancias = malloc(n*sizeof(float *));
-    for (k = 0; k < n; k++) distancias[k] = malloc(n*sizeof(float));
+    matrizDistancias = malloc(n*sizeof(float *));
+    for (k = 0; k < n; k++) matrizDistancias[k] = malloc(n*sizeof(float));
 }
 
-void initGrafo (node grafo) {
+/* Para não ter que recalcular inúmeras vezes a distância entre dois pontos (algo que demora, com muitas dimensões), opta-se
+        por criar uma matriz com todas as distâncias. Como o número de pontos esperado não é tão grande, a memória allocada
+        deve ser razoavelmente pequena. */
+
+void initGrafo (node grafo, int n) { /* Popula a matriz 'distancias', que vai guardar as distancias entre todos os pontos. */
     node i, j;
     
-    initDistancias();
+    initMatriz(n);
     
-    for (i = grafo; i != NULL; i = i->prox) {
-        for (j = i->prox; j != NULL; j = j->prox) {
-            float d = distance(i->point, j->point);
-            distancias[i->index][j->index] = d;
-            distancias[j->index][i->index] = d;
+    for (i = grafo->prox; i != NULL; i = i->prox) {
+        for (j = i; j != NULL; j = j->prox) {
+            float d = distance(i->point, j->point); /* Colocar o valor em [i][j] e em [j][i] permite acessar a matriz com quaisquer índices */
+            matrizDistancias[i->index][j->index] = d;
+            matrizDistancias[j->index][i->index] = d;
         }
     }
 }
 
+float quickDistance (node nodulo1, node nodulo2) { /* Acesso direto à matriz, sem ter que recalcular a distância (coisa que demora) */
+    return matrizDistancias[nodulo1->index][nodulo2->index];
+}
 
 

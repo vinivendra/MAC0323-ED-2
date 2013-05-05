@@ -12,8 +12,6 @@
 #define NULLFLOAT -10
 
 static int dim = 0;
-static int masterIndex = 0;
-
 
 /*
  Funções
@@ -29,19 +27,6 @@ point initEmptyPoint() { /* Malloca e retorna um novo ponto */
     return new;
 }
 
-node initNode (){ /* Malloca e retorna um novo nodulo, já com um ponto vazio */
-    node new = initEmptyNode();
-    new->point = initEmptyPoint();
-    return new;
-}
-
-node initEmptyNode () { /* Malloca e retorna um novo nodulo, sem ponto */
-    node new = malloc(sizeof(Node));
-    new->prox = NULL;
-    new->index = ++ masterIndex;
-    return new;
-}
-
 point randPoint() { /* Malloca e retorna um novo ponto, com valores aleatórios */
     int i = 0;
     point new = initEmptyPoint();
@@ -53,15 +38,13 @@ point randPoint() { /* Malloca e retorna um novo ponto, com valores aleatórios 
     return new;
 }
 
-node randNode() { /* Malloca e retorna um novo nodulo, já com um ponto com valores aleatórios */
-    node new = initEmptyNode();
-    new->point = randPoint();
-    return new;
-}
-
 float distance (point point1, point point2) { /* Retorna o quadrado da distância entre dois pontos */
     float resultado;
     int i = 0;
+    
+    if (point1 == point2) {
+        return 0;
+    }
     
     for (i = 0; i < dim; i++)
         resultado += (point1[i]-point2[i]) * (point1[i]-point2[i]);

@@ -1,8 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "Point.h"
+#include "Distance.h"
 
+#define YES 1
+#define NO 0
+
+int eSuficiente (float d, node pontos);
 
 int main (int argc, char *argv[]) {
     
@@ -34,7 +38,7 @@ int main (int argc, char *argv[]) {
      Outras variáveis:
     */
     
-    node pontos = initEmptyNode();       /* Ponteiro para a cabeça da futura lista de pontos */
+    node pontos = initHeadNode();       /* Ponteiro para a cabeça da futura lista de pontos */
     
     
     
@@ -119,9 +123,9 @@ int main (int argc, char *argv[]) {
         printf("Pontos gerados.\n");
     }
     else {
-        node nodulo = pontos; /* Percorrer e criar a lista de pontos */
-        for (i = 0; i < n; i ++) { /* Precisa criar n pontos */
-            nodulo->prox = randNode(); /* Inicializa um novo ponto com valores aleatórios */
+        node nodulo = pontos;           /* Percorrer e criar a lista de pontos */
+        for (i = 0; i < n; i ++) {      /* Precisa criar n pontos */
+            nodulo->prox = randNode();  /* Inicializa um novo ponto com valores aleatórios */
             nodulo = nodulo->prox;
         }
     }
@@ -146,11 +150,103 @@ int main (int argc, char *argv[]) {
         }
     }
     
+    initGrafo(pontos, n);
+    
+    
+    if (d >= 0) {       /* Se o usuário passou a distância, assume-se que ele quer saber se o grafo é conexo ou não */
+        int result = eSuficiente(d, pontos);
+        
+        if (result == YES) {
+            printf("O grafo é conexo.\n");
+        }
+        else {
+            printf("O grafo não é conexo.\n");
+        }
+    }
+    
+    
     
     
     return 0;
 }
 
+
+
+
+
+
+
+
+
+
+
+#pragma mark funções auxiliares
+
+node removeProximoNodulo (node lista) { /* Remove o nodulo 'lista->prox' e devolve um ponteiro para ele */
+    node new = lista->prox;
+    lista->prox = new->prox;
+    new->prox = NULL;
+    return new;
+}
+
+void insereNodulo (node nodulo, node lista) { /* Insere o nodulo 'nodulo' logo depois do nodulo 'lista' */
+    node aux = lista->prox;
+    lista->prox = nodulo;
+    nodulo->prox = aux;
+}
+
+node juntaLista (node lista1, node lista2) { /* Junta a 'lista2' logo depois da 'lista1' e devolve um ponteiro para a lista 1.
+                                                Considera que ambas têm cabeça. */
+    node nodulo = lista1;
+    
+    while (nodulo->prox != NULL) { /* Faz nodulo apontar para o fim da lista1 */
+        nodulo = nodulo->prox;
+    }
+    
+    nodulo->prox = lista2->prox; /* Junta as duas listas */
+    
+    return lista1;
+}
+
+
+int eSuficiente (float d, node pontos) { /* Descobre se a distância d é suficiente para tornar o grafo 'pontos' conexo */
+    
+    float d2 = d*d; /* Evita ter que multiplicar a cada iteração */
+    
+    node desconectados = pontos; /* Lista de pontos que ainda não conectamos */
+    node conectados = initEmptyNode(); /* Lista de pontos que já foram conectados */
+    node noduloCon; /* Percorrer a conectados */
+    node noduloDes; /* Percorrer a desconectados */
+    
+    conectados->prox = removeProximoNodulo(desconectados); /* Escolhe-se um ponto arbitrário para começar */
+    
+    noduloCon = conectados;
+    noduloDes = desconectados;
+        
+    while (noduloCon->prox != NULL) { /* Percorre a conectados */
+        while (noduloDes->prox != NULL) { /* Percorre a desconectados */
+            if (quickDistance(noduloDes->prox, noduloCon->prox) <= d2) { /* Se a distância for menor, precisa conectar */
+                insereNodulo(removeProximoNodulo(noduloDes), noduloCon->prox); /* Tira da desconectados, põe na conectados.
+                                                                                   Colocamos o ponto logo depois de noduloCon,
+                                                                                   garantindo que ele ainda será analisado.*/
+            }
+            else {
+                noduloDes = noduloDes->prox; /* Se removemos um ponto da desconectados, não precisa andar. Caso contrário, anda. */
+            }
+        }
+        noduloDes = desconectados; /* Reinicia do começo da desconectados */
+        noduloCon = noduloCon->prox; /* Anda na conectados */
+    }
+    
+    if (desconectados->prox == NULL) {/* Se a desconectados está vazia, é porque conseguimos conectar todos os pontos com a distância d */
+        pontos = juntaLista(desconectados, conectados); /* Reconstruimos a lista 'pontos' que foi separada em duas no processo */
+        return YES;
+    }
+    
+    pontos = juntaLista(desconectados, conectados);
+    return NO;
+    
+}
 
 
 
