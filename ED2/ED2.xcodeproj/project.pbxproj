@@ -15,6 +15,9 @@
 		2416F07717346FA1005463CF /* Point.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Point.c; sourceTree = "<group>"; };
 		2416F07817346FA1005463CF /* Point.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Point.h; sourceTree = "<group>"; };
 		2416F07917346FA1005463CF /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		24FA6F7B1736E58100A9BA0C /* List.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = List.c; sourceTree = "<group>"; };
+		24FA6F7C1736E58700A9BA0C /* List.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = List.h; sourceTree = "<group>"; };
+		24FA6F7D1736FCA700A9BA0C /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -24,11 +27,14 @@
 				2416F07517346FA1005463CF /* main.c */,
 				2416F07717346FA1005463CF /* Point.c */,
 				2416F07817346FA1005463CF /* Point.h */,
+				24FA6F7B1736E58100A9BA0C /* List.c */,
+				24FA6F7C1736E58700A9BA0C /* List.h */,
 				24081B7A173536F5005D3A2A /* Distance.c */,
 				24081B79173536EB005D3A2A /* Distance.h */,
 				2416F07417346FA1005463CF /* Enunciado.pdf */,
 				2416F07617346FA1005463CF /* makefile */,
 				2416F07917346FA1005463CF /* README.md */,
+				24FA6F7D1736FCA700A9BA0C /* .gitignore */,
 			);
 			sourceTree = "<group>";
 		};
