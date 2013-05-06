@@ -5,3 +5,4 @@
 
 void initGrafo (node grafo, int n);
 float quickDistance (node nodulo1, node nodulo2);
+void quickSortDistancias (int n);

@@ -19,7 +19,7 @@ int main (int argc, char *argv[]) {
     */
     
     int n = 0;          /* Número de pontos */
-	int m = 0;          /* Número de vezes para rodar */
+	int m = 1;          /* Número de vezes para rodar */
 	int s = 0;          /* Seed do srand()  */
     int D = 0;          /* Número de dimensões do hipercubo/da hiperesfera */
 	int v = 0;          /* 1 para imprimir os pontos, 2 para os pontos e os resultados parciais */
@@ -153,7 +153,7 @@ int main (int argc, char *argv[]) {
     initGrafo(pontos, n);
     
     
-    if (d >= 0) {       /* Se o usuário passou a distância, assume-se que ele quer saber se o grafo é conexo ou não */
+    if (d > 0) {       /* Se o usuário passou a distância, assume-se que ele quer saber se o grafo é conexo ou não */
         int result = eSuficiente(d, pontos);
         
         if (result == YES) {
@@ -162,6 +162,11 @@ int main (int argc, char *argv[]) {
         else {
             printf("O grafo não é conexo.\n");
         }
+    }
+    else {              /* Caso a distância não tenha sido fornecida, assume-se que o usuário quer calcular o limiar */
+        
+        quickSortDistancias(n);
+        
     }
     
     

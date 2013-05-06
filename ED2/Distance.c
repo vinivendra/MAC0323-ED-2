@@ -43,12 +43,33 @@ void initGrafo (node grafo, int n) { /* Popula a matriz 'matrizDistancias' e o v
             float d = distance(i->point, j->point); /* Colocar o valor em [i][j] e em [j][i] permite acessar a matriz com quaisquer índices */
             matrizDistancias[i->index][j->index] = d;
             vetorDistancias[k++] = d;
+            printf ("%f\n", d);
         }
     }
 }
 
 float quickDistance (node nodulo1, node nodulo2) { /* Acesso direto à matriz, sem ter que recalcular a distância (coisa que demora) */
     return matrizDistancias[nodulo1->index][nodulo2->index];
+}
+
+int compare (const void *a, const void *b) {
+    return ( *(float*)a - *(float*)b );
+}
+
+void quickSortDistancias (int n) {
+    int i = 0;
+    
+    for (i = 0; i < n*n; i++) {
+        printf("%f\n", vetorDistancias[i]);
+    }
+    
+    printf("\n\n\n");
+    
+    qsort(vetorDistancias, n, sizeof(float), compare);
+    
+    for (i = 0; i < n*n; i++) {
+        printf("%f\n", vetorDistancias[i]);
+    }
 }
 
 
